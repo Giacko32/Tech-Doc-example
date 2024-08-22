@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Technical Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <main id="main-doc">
+        <div id="text-doc">
+            <header id="main-header">
+                <h1>Python 'os' Module Brief Documentation</h1>
+            </header>
+            <section id="Introduction_to_the_'os'_Module" class="main-section">
+                <header>
+                    <h2>Introduction to the 'os' Module</h2>
+                </header>
+                <p>The 'os' module in Python provides a way of using operating system-dependent functionality like
+                    reading
+                    or
+                    writing to the file system, interacting with the environment, and executing commands. It is a
+                    built-in
+                    module,
+                    so no installation is required. This module is especially useful when you need to:</p>
+                <ul>
+                    <li>Interact with the underlying operating system.</li>
+                    <li>Access system-level information like the current working directory.</li>
+                    <li>Execute commands and scripts from within Python.</li>
+                </ul>
+                <code class="block-code">import os
+
+# Get the name of the operating system
+print(os.name)
+
+# Get the current working directory
+print(os.getcwd())
+</code>
+                <p>In the example above, we first import the os module. The os.name function returns a string indicating
+                    the
+                    operating system's name (e.g., 'posix' for Unix-like systems). The <code>os.getcwd()</code> function
+                    returns the
+                    current working directory as a string, which is the directory in which the Python script is
+                    currently
+                    running.
+                </p>
+            </section>
+            <section id="Working_with_the_File_System" class="main-section">
+                <header>
+                    <h2>Working with the File System</h2>
+                </header>
+                <p>One of the primary uses of the os module is to interact with the file system. You can:</p>
+                <ul>
+                    <li>Create new directories.</li>
+                    <li>Rename existing directories or files.</li>
+                    <li>Remove directories and manage file paths.</li>
+                </ul>
+                <code class="block-code"># Create a new directory
+os.mkdir('new_directory')
+
+# Rename the directory
+os.rename('new_directory', 'renamed_directory')
+
+# Remove the directory
+os.rmdir('renamed_directory')</code>
+                <p>This code demonstrates basic file system operations. The <code>os.mkdir()</code> function creates a
+                    new
+                    directory named 'new_directory'. We then use <code>os.rename()</code> to rename this directory to
+                    'renamed_directory'. Finally, <code>os.rmdir()</code> removes the 'renamed_directory'. These
+                    functions
+                    are
+                    essential for managing directories and organizing files.</p>
+            </section>
+            <section id="Managing_Environment_Variables" class="main-section">
+                <header>
+                    <h2>Managing Environment Variables</h2>
+                </header>
+                <p>The os module allows you to access and modify environment variables, which are key-value pairs that
+                    affect how
+                    processes behave on a computer. Environment variables are often used to store configuration
+                    settings.
+                </p>
+                <code class="block-code"># Get the value of an environment variable
+home_dir = os.getenv('HOME')
+print(f'Home Directory: {home_dir}')
+
+# Set a new environment variable
+os.environ['MY_VAR'] = 'my_value'
+print(os.getenv('MY_VAR'))</code>
+                <p>In this example, <code>os.getenv('HOME')</code> retrieves the value of the environment variable
+                    'HOME',
+                    which
+                    typically contains the path to the user's home directory. We then print this value. Next,
+                    <code>os.environ['MY_VAR'] = 'my_value'</code> sets a new environment variable 'MY_VAR' with the
+                    value
+                    'my_value'. The value of this new environment variable is then retrieved and printed using
+                    <code>os.getenv('MY_VAR')</code>.
+                </p>
+            </section>
+            <section id="Executing_Shell_Commands" class="main-section">
+                <header>
+                    <h2>Executing Shell Commands</h2>
+                </header>
+                <p>Another powerful feature of the os module is the ability to execute shell commands directly from
+                    within
+                    Python.
+                    This can be useful for automating tasks and running system commands without leaving the Python
+                    environment.</p>
+                <code class="block-code"># Run a shell command
+os.system('echo Hello, World!')
+
+# Get the output of a shell command
+stream = os.popen('ls')
+output = stream.read()
+print(output)</code>
+                <p>Here, <code>os.system('echo Hello, World!')</code> runs the shell command
+                    <code>echo Hello, World!</code>,
+                    which prints "Hello, World!" to the console. The <code>os.popen('ls')</code> command opens a pipe to
+                    the
+                    command
+                    ls (which lists directory contents) and captures its output. The output is then read into the output
+                    variable
+                    and printed. This is particularly useful for integrating Python scripts with other system utilities.
+                </p>
+            </section>
+            <section id="Handling_Processes_and_Concurrency" class="main-section">
+                <header>
+                    <h2>Handling Processes and Concurrency</h2>
+                </header>
+                <p>The os module also provides functions to handle processes, allowing you to retrieve the process ID of
+                    the
+                    current script, spawn new processes (on Unix-like systems), and manage child processes. This is
+                    useful
+                    for
+                    running multiple operations concurrently.</p>
+                <code class="block-code"># Get the process ID of the current process
+pid = os.getpid()
+print(f'Current Process ID: {pid}')
+
+# Fork a new process (Unix only)
+if os.name != 'nt':  # os.fork is not available on Windows
+    pid = os.fork()
+    if pid == 0:
+        print('This is the child process.')
+    else:
+        print('This is the parent process.')</code>
+                <p>In this example, <code>os.getpid()</code> retrieves the process ID of the currently running Python
+                    script. The
+                    <code>os.fork()</code> function (available only on Unix-like systems) creates a new child process
+                    that
+                    is a copy
+                    of the parent process. The returned pid is 0 in the child process and the child's PID in the parent
+                    process.
+                    This allows you to differentiate between parent and child processes, enabling concurrent execution.
+                </p>
+            </section>
+        </div>
+        <nav id="navbar">
+            <img id="logo"
+                src="https://download.logo.wine/logo/Python_(programming_language)/Python_(programming_language)-Logo.wine.png"
+                alt="python-logo">
+            <header id="navtitle">
+                <h2>The 'os' Python Module</h2>
+            </header>
+            <div class="a-cell"><a class="nav-link" href="#Introduction_to_the_'os'_Module">Introduction to the 'os'
+                    Module</a></div>
+            <div class="a-cell"><a class="nav-link" href="#Working_with_the_File_System">Working with the File
+                    System</a></div>
+            <div class="a-cell"><a class="nav-link" href="#Managing_Environment_Variables">Managing Environment
+                    Variables</a></div>
+            <div class="a-cell"><a class="nav-link" href="#Executing_Shell_Commands">Executing Shell Commands</a></div>
+            <div class="a-cell"><a class="nav-link" href="#Handling_Processes_and_Concurrency">Handling Processes and
+                    Concurrency</a></div>
+        </nav>
+    </main>
+</body>
+
+</html>
